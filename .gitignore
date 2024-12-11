@@ -20,3 +20,6 @@ Gemfile.lock
 .bundles_cache
 docs/vendor/
 clients/da-vinci-client/classHash*.txt
+
+# Ignore Gradle build output directory
+build
