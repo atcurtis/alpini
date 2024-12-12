@@ -4,6 +4,7 @@
 plugins {
     id 'java-library'
     //id 'com.github.spotbugs' version '4.8.0' apply false
+    id 'maven-publish'
 }
 
 apply from: "$rootDir/gradle/helper/git.gradle"
@@ -60,4 +61,15 @@ ext.libraries = [
 
 group = 'com.linkedin.alpini'
 
-
+publishing {
+  repositories {
+    maven {
+      name = "OSSRH"
+      url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+      credentials {
+        username = System.getenv("MAVEN_USERNAME")
+        password = System.getenv("MAVEN_PASSWORD")
+      }
+    }
+  }
+}
