@@ -1,12 +1,16 @@
 apply plugin: 'java-library'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 dependencies {
   testImplementation libraries.testng
+  testImplementation libraries.mockito
   implementation libraries.log4j2api
   compileOnly libraries.jsr305
-  //implementation project(':internal:alpini:common:alpini-common-base')
-  //testImplementation spec.external.'mockito-all'
-  //testImplementation libraries.testng
+  //implementation project(':common:alpini-common-base')
 }
 
 

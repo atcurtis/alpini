@@ -1,8 +1,8 @@
 package com.linkedin.alpini.netty4.pool;
 
 import com.linkedin.alpini.base.misc.Time;
+import com.linkedin.alpini.base.test.TestUtil;
 import com.linkedin.alpini.netty4.handlers.Log4J2LoggingHandler;
-import com.linkedin.venice.utils.TestUtils;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -95,7 +95,7 @@ public class TestFixedFastChannelPoolImpl {
           createAdder,
           closeAdder);
 
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         Assert.assertEquals(pool.getConnectedChannels(), 0);
       });
 
@@ -113,7 +113,7 @@ public class TestFixedFastChannelPoolImpl {
         _eventLoopGroup.execute(() -> pool.release(channelFuture.getNow()));
       }
 
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         LOG.info("created={}, closed={}", createAdder, closeAdder);
         Assert.assertEquals(pool.getConnectedChannels(), minConnections);
       });
@@ -141,7 +141,7 @@ public class TestFixedFastChannelPoolImpl {
       pool.acquire().addListener((Future<Channel> f) -> {
         try {
           if (f.isSuccess()) {
-            TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+            TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
               int beforeCloseCount = pool.acquiredChannelCount();
               LOG.info("Before close :{}", beforeCloseCount);
               Assert.assertEquals(beforeCloseCount, 1);
@@ -150,7 +150,7 @@ public class TestFixedFastChannelPoolImpl {
             // Close the channel
             f.getNow().close().addListener(ignored -> f.getNow().eventLoop().execute(() -> {
               try {
-                TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+                TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
                   int afterCloseCount = pool.acquiredChannelCount();
                   LOG.info("After close :{}", afterCloseCount);
                   Assert.assertEquals(afterCloseCount, 0);
@@ -159,7 +159,7 @@ public class TestFixedFastChannelPoolImpl {
                 // Release the channel
                 pool.release(f.getNow()).addListener(bar -> {
                   try {
-                    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+                    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
                       int afterReleaseCount = pool.acquiredChannelCount();
                       LOG.info("After release :{}", afterReleaseCount);
                       Assert.assertEquals(afterReleaseCount, 0);
@@ -185,7 +185,7 @@ public class TestFixedFastChannelPoolImpl {
       LOG.info("closing pool {}", pool);
       CompletableFuture.runAsync(pool::close, _eventLoopGroup.next()).join();
 
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         LOG.info("created={}, closed={}", createAdder, closeAdder);
         Assert.assertEquals(pool.getConnectedChannels(), 0);
       });
@@ -249,7 +249,7 @@ public class TestFixedFastChannelPoolImpl {
       }
 
       // Wait until min connections are built.
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         LOG.info("created={}, closed={}", createAdder, closeAdder);
         Assert.assertEquals(pool.getConnectedChannels(), minConnections);
       });
@@ -261,7 +261,7 @@ public class TestFixedFastChannelPoolImpl {
       LOG.info("closing pool {}", pool);
       CompletableFuture.runAsync(pool::close, _eventLoopGroup.next()).join();
 
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         LOG.info("created={}, closed={}", createAdder, closeAdder);
         Assert.assertEquals(pool.getConnectedChannels(), 0);
       });

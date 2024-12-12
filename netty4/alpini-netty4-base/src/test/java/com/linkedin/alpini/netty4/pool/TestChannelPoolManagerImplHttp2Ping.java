@@ -5,9 +5,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
+import com.linkedin.alpini.base.test.TestUtil;
 import com.linkedin.alpini.consts.QOS;
 import com.linkedin.alpini.netty4.misc.NettyUtils;
-import com.linkedin.venice.utils.TestUtils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -106,7 +106,7 @@ public class TestChannelPoolManagerImplHttp2Ping {
     manager.startPeriodicPing();
 
     if (enableHttp2Ping) {
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         Assert.assertTrue(manager.enablePeriodicPing());
         Assert.assertNotNull(manager.getPeriodicPingScheduledFuture());
         Assert.assertEquals(manager.getPools().size(), 1);
@@ -114,7 +114,7 @@ public class TestChannelPoolManagerImplHttp2Ping {
             .construct(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
       });
     } else {
-      TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+      TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
         Assert.assertFalse(manager.enablePeriodicPing());
         Assert.assertNull(manager.getPeriodicPingScheduledFuture());
         Assert.assertEquals(manager.getPools().size(), 1);
@@ -127,7 +127,7 @@ public class TestChannelPoolManagerImplHttp2Ping {
     // to send http2 ping. In particular, for the local pool impl, it calls pool.acquire() 4 times
     // for pool initialization.
     if (!enableHttp2Ping || isPoolClosing) {
-      TestUtils.waitForNonDeterministicAssertion(
+      TestUtil.waitForNonDeterministicAssertion(
           1,
           TimeUnit.SECONDS,
           () -> Mockito.verify(pool, useGlobalPool ? Mockito.never() : Mockito.times(numOfExecutors)).acquire());

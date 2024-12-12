@@ -3,7 +3,7 @@ package com.linkedin.alpini.netty4.ssl;
 import com.linkedin.alpini.base.concurrency.Executors;
 import com.linkedin.alpini.base.misc.ExceptionUtil;
 import com.linkedin.alpini.base.misc.Time;
-import com.linkedin.venice.utils.TestUtils;
+import com.linkedin.alpini.base.test.TestUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -615,7 +615,7 @@ public class TestSslInitializer {
           }
         });
 
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -644,7 +644,7 @@ public class TestSslInitializer {
             pendingHandshakesNonZero.set(true);
           }
         });
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -727,7 +727,7 @@ public class TestSslInitializer {
             pendingHandshakesMoreThanOne.set(true);
           }
         });
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -756,7 +756,7 @@ public class TestSslInitializer {
             pendingHandshakesMoreThanOne.set(true);
           }
         });
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -789,7 +789,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -812,7 +812,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -843,7 +843,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -866,7 +866,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -897,7 +897,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -920,7 +920,7 @@ public class TestSslInitializer {
             1,
             ctx -> {},
             ctx -> {}));
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -982,7 +982,7 @@ public class TestSslInitializer {
       Assert.assertTrue(protocol.isDone());
       Assert.assertEquals(protocol.getNow(null), "TLSv1.2");
     }
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);
@@ -1012,7 +1012,7 @@ public class TestSslInitializer {
       Assert.assertTrue(protocol.isDone());
       Assert.assertEquals(protocol.getNow(null), "TLSv1.2");
     }
-    TestUtils.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
+    TestUtil.waitForNonDeterministicAssertion(1, TimeUnit.SECONDS, () -> {
       Assert.assertEquals(
           serverSslInitializer.getAvailablePermits(),
           UnaryOperator.identity().equals(serverOp) ? 0 : RESOLVE_EXECUTOR_THREADS);

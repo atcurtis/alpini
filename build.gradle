@@ -8,6 +8,10 @@ plugins {
 
 apply from: "$rootDir/gradle/helper/git.gradle"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 def log4j2Version = '2.17.1'
 def jacksonVersion = '2.13.4'

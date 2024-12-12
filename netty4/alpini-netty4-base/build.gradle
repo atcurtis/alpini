@@ -1,5 +1,10 @@
 apply plugin: 'java-library'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 dependencies {
   implementation project(':common:alpini-common-base')
   implementation project(':common:alpini-common-const')
@@ -11,10 +16,9 @@ dependencies {
   implementation libraries.log4j2api
   implementation libraries.netty
   implementation libraries.snappy
-  //testImplementation project(':internal:alpini:netty4:alpini-netty4-test')
-  //testImplementation spec.external.'mockito-all'
-  //testImplementation libraries.testng
+  testImplementation project(':common:alpini-common-test')
   testImplementation libraries.testng
+  testImplementation libraries.mockito
   testImplementation libraries.mail
   testImplementation libraries.log4j2core
 }

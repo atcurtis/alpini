@@ -1,5 +1,10 @@
 apply plugin: 'java-library'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 dependencies {
   implementation project(':common:alpini-common-base')
   implementation project(':common:alpini-common-io')
@@ -10,6 +15,7 @@ dependencies {
   compileOnly project(':netty4:alpini-netty4-base')
   compileOnly libraries.mail
   testImplementation libraries.testng
+  testImplementation libraries.mockito
   testImplementation project(':netty4:alpini-netty4-base')
   testImplementation libraries.mail
   implementation libraries.javaxActivation
