@@ -1,3 +1,5 @@
+apply plugin: 'java-library'
+
 dependencies {
   testImplementation libraries.testng
   implementation libraries.log4j2api

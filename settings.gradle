@@ -7,7 +7,29 @@
  * in the user manual at https://docs.gradle.org/7.2/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'alpini'
+pluginManagement {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+      url  "https://linkedin.jfrog.io/artifactory/open-source"
+    }
+    gradlePluginPortal()
+  }
+}
+
+plugins {
+  id 'com.gradle.enterprise' version '3.13.1'
+}
+
+rootProject.name = "alpini"
+
+apply from: "$rootDir/gradle/helper/git.gradle"
+
+dependencyResolutionManagement {
+  repositories.addAll(pluginManagement.repositories)
+}
+
 include 'common:alpini-common-base'
 include 'common:alpini-common-cli'
 include 'common:alpini-common-const'

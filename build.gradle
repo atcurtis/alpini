@@ -1,0 +1,59 @@
+//import org.gradle.internal.logging.text.StyledTextOutput.Style
+//import org.gradle.internal.logging.text.StyledTextOutputFactory
+
+plugins {
+    id 'java-library'
+    //id 'com.github.spotbugs' version '4.8.0' apply false
+}
+
+apply from: "$rootDir/gradle/helper/git.gradle"
+
+
+def log4j2Version = '2.17.1'
+def jacksonVersion = '2.13.4'
+def alpnAgentVersion = '2.0.10'
+def openTelemetryVersion = '1.33.0'
+
+ext.libraries = [
+    alpnAgent: "org.mortbay.jetty.alpn:jetty-alpn-agent:${alpnAgentVersion}",
+    bouncyCastle: 'org.bouncycastle:bcprov-jdk15on:1.55',
+    bouncyCastleBcpkix: 'org.bouncycastle:bcpkix-jdk15on:1.55',
+    commonsCodec: 'commons-codec:commons-codec:1.4',
+    commonsConfiguration: 'commons-configuration:commons-configuration:1.9',
+    commonsIo: 'commons-io:commons-io:2.11.0',
+    commonsCli: 'commons-cli:commons-cli:1.5.0',
+    commonsLang: 'commons-lang:commons-lang:2.6',
+    conscrypt: 'org.conscrypt:conscrypt-openjdk-uber:2.5.2',
+    jacksonCore: "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+    jacksonAnnotations: "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+    jacksonDatabind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+    javax: 'javax.servlet:javax.servlet-api:3.1.0',
+    javaxActivation: 'com.sun.activation:javax.activation:1.2.0',
+    jdom: 'org.jdom:jdom:1.1',
+    jna: 'net.java.dev.jna:jna:4.5.1',
+    jsr305: 'com.google.code.findbugs:jsr305:3.0.2',
+    joptSimple: 'net.sf.jopt-simple:jopt-simple:3.2',
+    log4j2api: "org.apache.logging.log4j:log4j-api:${log4j2Version}",
+    log4j2core: "org.apache.logging.log4j:log4j-core:${log4j2Version}",
+    log4j2Slf4j: "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}",
+    mail: 'javax.mail:mail:1.4.4',
+    mockito: 'org.mockito:mockito-core:4.11.0',
+    netty: 'io.netty:netty-all:4.1.74.Final',
+    slf4j: 'org.slf4j:slf4j:1.7.36',
+    slf4jApi: 'org.slf4j:slf4j-api:1.7.36',
+    slf4jSimple: 'org.slf4j:slf4j-simple:1.7.36',
+    snappy: 'org.iq80.snappy:snappy:0.4',
+    spotbugs: 'com.github.spotbugs:spotbugs:4.5.2',
+    testng: 'org.testng:testng:6.14.3',
+    zookeeper: 'org.apache.zookeeper:zookeeper:3.6.3',
+    zstd: 'com.github.luben:zstd-jni:1.5.2-3',
+    opentelemetryApi: "io.opentelemetry:opentelemetry-api:${openTelemetryVersion}",
+    opentelemetrySdk: "io.opentelemetry:opentelemetry-sdk:${openTelemetryVersion}",
+    opentelemetryExporterLogging: "io.opentelemetry:opentelemetry-exporter-logging:${openTelemetryVersion}",
+    opentelemetryExporterOtlp: "io.opentelemetry:opentelemetry-exporter-otlp:${openTelemetryVersion}",
+    opentelemetryExporterCommon: "io.opentelemetry:opentelemetry-exporter-common:${openTelemetryVersion}"
+]
+
+group = 'com.linkedin.alpini'
+
+
