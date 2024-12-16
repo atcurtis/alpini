@@ -34,6 +34,7 @@ public class StaleConnectionHandler extends ChannelDuplexHandler {
   private static final Logger LOG = LogManager.getLogger(StaleConnectionHandler.class);
 
   /** @deprecated */
+  @Deprecated
   private final long _closeConnectionTimeMillis;
 
   private final long _creationTimestamp = System.currentTimeMillis();
