@@ -10,8 +10,8 @@ plugins {
 apply from: "$rootDir/gradle/helper/git.gradle"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 def log4j2Version = '2.17.1'
@@ -73,3 +73,13 @@ publishing {
     }
   }
 }
+
+configurations {
+  alpnAgent {
+  }
+}
+
+dependencies {
+  alpnAgent libraries.alpnAgent
+}
+
