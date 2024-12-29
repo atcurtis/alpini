@@ -14,4 +14,11 @@ dependencies {
   compileOnly libraries.jsr305
 }
 
+publishing {
+    publications {
+        jar(MavenPublication) {
+            from components.java
+        }
+    }
+}
 

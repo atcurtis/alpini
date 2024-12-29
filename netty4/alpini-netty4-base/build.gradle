@@ -23,4 +23,10 @@ dependencies {
   testImplementation libraries.log4j2core
 }
 
-
+publishing {
+  publications {
+    jar(MavenPublication) {
+      from components.java
+    }
+  }
+}

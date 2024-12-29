@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+apply plugin: 'maven-publish'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -16,4 +17,12 @@ dependencies {
   implementation libraries.jacksonDatabind
   implementation libraries.jsr305
   implementation libraries.log4j2api
+}
+
+publishing {
+    publications {
+        jar(MavenPublication) {
+            from components.java
+        }
+    }
 }

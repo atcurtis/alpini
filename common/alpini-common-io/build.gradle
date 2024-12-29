@@ -15,4 +15,11 @@ dependencies {
   implementation libraries.log4j2api
 }
 
+publishing {
+    publications {
+        jar(MavenPublication) {
+            from components.java
+        }
+    }
+}
 

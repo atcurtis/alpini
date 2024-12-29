@@ -20,3 +20,11 @@ dependencies {
   testImplementation libraries.mail
   implementation libraries.javaxActivation
 }
+
+publishing {
+  publications {
+    jar(MavenPublication) {
+      from components.java
+    }
+  }
+}
