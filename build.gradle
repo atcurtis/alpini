@@ -2,10 +2,10 @@
 //import org.gradle.internal.logging.text.StyledTextOutputFactory
 
 plugins {
+    id('com.widen.versioning') version '0.4.1'
     id 'java-library'
     //id 'com.github.spotbugs' version '4.8.0' apply false
     id 'maven-publish'
-  id 'com.widen.versioning' version '0.4.1'
 }
 
 apply from: "$rootDir/gradle/helper/git.gradle"
@@ -13,6 +13,9 @@ apply from: "$rootDir/gradle/helper/git.gradle"
 versioning {
   tagPrefix = 'v'
 }
+
+System.out.println("Project version = " + version)
+rootProject.version = "" + version
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -68,9 +71,9 @@ group = 'com.linkedin.alpini'
 
 subprojects {
   apply plugin: 'maven-publish'
+  version = rootProject.version
+  group = rootProject.group
   afterEvaluate {
-    version = rootProject.version
-    group = rootProject.group
     publishing {
       repositories {
         maven {
@@ -82,6 +85,17 @@ subprojects {
           }
         }
       }
+    }
+  }
+}
+
+allprojects {
+  tasks.withType(org.gradle.jvm.tasks.Jar) {
+    manifest {
+      attributes(
+              "Implementation-Title": "Alpini",
+              "Implementation-Version": rootProject.version
+      )
     }
   }
 }
