@@ -16,3 +16,11 @@ dependencies {
   testImplementation libraries.testng
   testImplementation project(':netty4:alpini-netty4-base')
 }
+
+publishing {
+  publications {
+    jar(MavenPublication) {
+      from components.java
+    }
+  }
+}

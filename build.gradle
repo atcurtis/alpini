@@ -5,9 +5,14 @@ plugins {
     id 'java-library'
     //id 'com.github.spotbugs' version '4.8.0' apply false
     id 'maven-publish'
+  id 'com.widen.versioning' version '0.4.1'
 }
 
 apply from: "$rootDir/gradle/helper/git.gradle"
+
+versioning {
+  tagPrefix = 'v'
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -62,23 +67,20 @@ ext.libraries = [
 group = 'com.linkedin.alpini'
 
 subprojects {
-  apply plugin: 'java-library'
   apply plugin: 'maven-publish'
-
-  publishing {
-    repositories {
-      maven {
-        name = "GitHubPackages"
-        url = "https://maven.pkg.github.com/atcurtis/alpini"
-        credentials {
-          username = System.getenv("GITHUB_ACTION")
-          password = System.getenv("GITHUB_TOKEN")
+  afterEvaluate {
+    version = rootProject.version
+    group = rootProject.group
+    publishing {
+      repositories {
+        maven {
+          name = "GitHubPackages"
+          url = "https://maven.pkg.github.com/atcurtis/alpini"
+          credentials {
+            username = System.getenv("GITHUB_ACTION")
+            password = System.getenv("GITHUB_TOKEN")
+          }
         }
-      }
-    }
-    publications {
-      jar(MavenPublication) {
-        from components.java
       }
     }
   }

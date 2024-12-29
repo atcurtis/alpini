@@ -15,3 +15,11 @@ dependencies {
   testImplementation libraries.mockito
   testImplementation project(':netty4:alpini-netty4-base')
 }
+
+publishing {
+    publications {
+        jar(MavenPublication) {
+            from components.java
+        }
+    }
+}

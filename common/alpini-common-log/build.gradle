@@ -13,4 +13,11 @@ dependencies {
   //implementation project(':common:alpini-common-base')
 }
 
+publishing {
+    publications {
+        jar(MavenPublication) {
+            from components.java
+        }
+    }
+}
 
