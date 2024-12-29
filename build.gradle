@@ -61,14 +61,24 @@ ext.libraries = [
 
 group = 'com.linkedin.alpini'
 
-publishing {
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/atcurtis/alpini"
-      credentials {
-        username = System.getenv("GITHUB_ACTION")
-        password = System.getenv("GITHUB_TOKEN")
+subprojects {
+  apply plugin: 'java-library'
+  apply plugin: 'maven-publish'
+
+  publishing {
+    repositories {
+      maven {
+        name = "GitHubPackages"
+        url = "https://maven.pkg.github.com/atcurtis/alpini"
+        credentials {
+          username = System.getenv("GITHUB_ACTION")
+          password = System.getenv("GITHUB_TOKEN")
+        }
+      }
+    }
+    publications {
+      jar(MavenPublication) {
+        from components.java
       }
     }
   }
