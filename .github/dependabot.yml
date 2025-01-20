@@ -4,8 +4,15 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
+registries:
+  gradle-artifactory:
+    type: maven-repository
+    url: https://maven.pkg.github.com/atcurtis/alpini
+    username: dependabot
+    password: ${{ secrets.GH_TOKEN }}
 updates:
   - package-ecosystem: "gradle" # See documentation for possible values
     directory: "/" # Location of package manifests
+    registries: "*"
     schedule:
       interval: "weekly"
