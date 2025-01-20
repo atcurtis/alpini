@@ -9,18 +9,18 @@ dependencies {
   implementation project(':common:alpini-common-base')
   implementation project(':common:alpini-common-const')
   implementation project(':common:alpini-common-io')
-  implementation libraries.bouncyCastleBcpkix
-  implementation libraries.commonsIo
-  implementation libraries.commonsLang
-  implementation libraries.jsr305
-  implementation libraries.log4j2api
-  implementation libraries.netty
-  implementation libraries.snappy
+  implementation "org.bouncycastle:bcpkix-jdk15on:${bouncyCastleVersion}"
+  implementation 'commons-io:commons-io:2.11.0'
+  implementation  'commons-lang:commons-lang:2.6'
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  implementation  "org.apache.logging.log4j:log4j-api:${log4j2Version}"
+  implementation 'io.netty:netty-all:4.1.74.Final'
+  implementation 'org.iq80.snappy:snappy:0.4'
   testImplementation project(':common:alpini-common-test')
-  testImplementation libraries.testng
-  testImplementation libraries.mockito
-  testImplementation libraries.mail
-  testImplementation libraries.log4j2core
+  testImplementation 'org.testng:testng:6.14.3'
+  testImplementation 'org.mockito:mockito-core:4.11.0'
+  testImplementation 'javax.mail:mail:1.4.4'
+  testImplementation "org.apache.logging.log4j:log4j-core:${log4j2Version}"
 }
 
 publishing {

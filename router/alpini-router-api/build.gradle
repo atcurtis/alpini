@@ -8,11 +8,11 @@ java {
 dependencies {
   implementation project(':common:alpini-common-base')
   compileOnly project(':netty4:alpini-netty4-base')
-  implementation libraries.jsr305
-  implementation libraries.log4j2api
-  implementation libraries.netty
-  testImplementation libraries.testng
-  testImplementation libraries.mockito
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  implementation "org.apache.logging.log4j:log4j-api:${log4j2Version}"
+  implementation 'io.netty:netty-all:4.1.74.Final'
+  testImplementation 'org.testng:testng:6.14.3'
+  testImplementation 'org.mockito:mockito-core:4.11.0'
   testImplementation project(':netty4:alpini-netty4-base')
 }
 

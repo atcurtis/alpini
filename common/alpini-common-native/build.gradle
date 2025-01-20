@@ -6,10 +6,10 @@ java {
 }
 
 dependencies {
-  testImplementation libraries.testng
-  implementation libraries.log4j2api
-  implementation libraries.jna
-  implementation libraries.jsr305
+  testImplementation 'org.testng:testng:6.14.3'
+  implementation "org.apache.logging.log4j:log4j-api:${log4j2Version}"
+  implementation 'net.java.dev.jna:jna:4.5.1'
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }
 
 publishing {
