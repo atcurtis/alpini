@@ -275,7 +275,9 @@ public abstract class BasicHttpObjectDecoder extends HttpObjectDecoder {
           return;
         }
       case READ_CHUNKED_CONTENT: { // SUPPRESS CHECKSTYLE FallThroughCheck
-        assert chunkSize <= Integer.MAX_VALUE;
+        if (chunkSize > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("chunkSize is too large to be cast to an int: " + chunkSize);
+        }
         int toRead = Math.min((int) chunkSize, maxChunkSize);
         toRead = Math.min(toRead, buffer.readableBytes());
         if (toRead == 0) {
